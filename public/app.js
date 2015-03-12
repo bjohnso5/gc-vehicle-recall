@@ -1,6 +1,5 @@
 ///<reference path="recall-api/recall.d.ts"/>
-///<reference path="../typings/angularjs/angular.d.ts"/>
-///<reference path="../typings/restangular/restangular.d.ts"/>
+///<reference path="../typings/tsd.d.ts"/>
 angular.module('ca.gc.recall', ['recallApi']).config(['RestangularProvider', function (RestangularProvider) {
     RestangularProvider.setDefaultHttpFields({ cache: true });
 }]).controller('HomeController', [

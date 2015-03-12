@@ -1,6 +1,5 @@
 ///<reference path="recall.d.ts"/>
-///<reference path="../../typings/angularjs/angular.d.ts"/>
-///<reference path="../../typings/restangular/restangular.d.ts"/>
+///<reference path="../../typings/tsd.d.ts"/>
 /**
  * Created by JOHNSB7 on 1/14/2015.
  */

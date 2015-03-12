@@ -1,7 +1,6 @@
 'use strict';
 
 var express = require('express');
-var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 var morgan = require('morgan'); // formerly express.logger
@@ -39,7 +38,9 @@ if ('development' === app.get('env')) {
 // Proxy requests to the Government of Canada recall database
 app.use('/v1.3', proxyMiddleware(require('url').parse('http://data.tc.gc.ca/v1.3')));
 
-app.get('/', routes.index);
+app.get('/', function (req, res) {
+  res.render('index.html');
+});
 
 var port = app.get('port');
 http.createServer(app).listen(port, function () {

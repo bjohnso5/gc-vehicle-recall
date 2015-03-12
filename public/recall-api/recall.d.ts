@@ -5,8 +5,7 @@ declare module VehicleRecall {
     'make-name'?: string;
     'minimum-model-year'?: string;
     'maximum-model-year'?: string;
-
-    // required query parameters
+    // required query
     'model-name': string;
     page: number;
   }
