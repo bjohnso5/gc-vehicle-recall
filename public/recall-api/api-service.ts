@@ -10,7 +10,7 @@ angular.module('recallApi')
 .factory('recallService', [
     'Restangular',
     function(Restangular) {
-      Restangular.setBaseUrl('https://webbroker.devl.td.com/v1.3/api/eng/vehicle-recall-database');
+      Restangular.setBaseUrl('/v1.3/api/eng/vehicle-recall-database');
 
       var validParameters = [
         'make-name',

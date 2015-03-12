@@ -8,15 +8,15 @@ var morgan = require('morgan'); // formerly express.logger
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var errorhandler = require('errorhandler');
-//var compression = require('compression');
+var compression = require('compression');
 var favicon = require('serve-favicon');
-
+var proxyMiddleware = require('proxy-middleware');
 var app = express();
 
 // Gzip support
-//app.use(compression({
-//  threshold: 512
-//}));
+app.use(compression({
+  threshold: 512
+}));
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -30,17 +30,14 @@ app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 // expose bower_components (vendor files) on the /bower_components route
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
-// allow serving of minified files for local testing of distributable package
-//app.use('/dist',  express.static(__dirname + '/dist'));
-// allow serving of language resources
-//app.use('/i18n', express.static(__dirname + '/i18n'));
-// allow serving of API docs
-//app.use('/docs', express.static(__dirname + '/docs'));
 
 // development only
 if ('development' === app.get('env')) {
   app.use(errorhandler());
 }
+
+// Proxy requests to the Government of Canada recall database
+app.use('/v1.3', proxyMiddleware(require('url').parse('http://data.tc.gc.ca/v1.3')));
 
 app.get('/', routes.index);
 
