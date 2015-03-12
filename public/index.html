@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html id="ng-app" data-ng-app="ca.gc.recall">
+<head lang="en">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vehicle Recall Search</title>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+
+  <div data-ng-controller="HomeController" data-ng-cloak class="container">
+    <div class="row"><div class="col-lg-12">&nbsp;</div></div>
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <form>
+              <div class="form-group">
+                <label for="make">Make</label>
+                <input class="form-control" type="text" id="make" name="make" data-ng-model="queryOptions['make-name']" placeholder="e.g. Dodge" />
+              </div>
+              <div class="form-group">
+                <label for="model">Model</label>
+                <input class="form-control" type="text" id="model" name="model" data-ng-model="queryOptions['model-name']" placeholder="e.g. Durango" />
+              </div>
+              <div class="form-group">
+                <label for="minYear">Minimum Year</label>
+                <input class="form-control" type="number"  min="1950" max="2100" step="1" id="minYear" name="minYear" data-ng-model="queryOptions['minimum-model-year']"/>
+              </div>
+              <div class="form-group">
+                <label for="maxYear">Maximum Year</label>
+                <input class="form-control" type="number"  min="1950" max="2100" step="1" id="maxYear" name="maxYear" data-ng-model="queryOptions['maximum-model-year']"/>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary" data-ng-click="query()">Search</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-10">
+        <div class="panel panel-default">
+          <div class="panel-heading alert-warning" data-ng-hide="valid">You must specify a model name to perform a query</div>
+          <div class="panel-body">
+            <table class="table table-condensed table-responsive table-hover table-bordered table-striped">
+              <tr>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Recall Number</th>
+              </tr>
+              <tr data-ng-repeat="recall in resultSet" data-ng-class="{success: isSelected(recall)}">
+                <td>{{getMake(recall)}}</td>
+                <td>{{getModel(recall)}}</td>
+                <td>{{getYear(recall)}}</td>
+                <td><a href="javascript:void(0)" data-ng-click="details(getRecallNumber(recall))">{{getRecallNumber(recall)}}</a></td>
+              </tr>
+            </table>
+          </div>
+          <div class="panel-footer">
+            <div class="btn-group" role="group" aria-label="Get previous or next results, if applicable">
+                <button class="btn btn-default" data-ng-disabled="!previousResults()" data-ng-click="queryPrevious()">Previous</button>
+                <button class="btn btn-default" data-ng-disabled="!moreResults()" data-ng-click="queryNext()">Next</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" data-ng-if="summary" data-ng-cloak>
+      <div class="col-lg-2">&nbsp;</div>
+      <div class="col-lg-10">
+        <table class="table table-responsive table-condensed table-hover table-bordered table-striped">
+          <tr>
+            <th>Recall Date</th>
+            <th>Summary</th>
+          </tr>
+          <tr>
+            <td>{{getRecallDate()}}</td>
+            <td>{{getSummaryText()}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="/bower_components/lodash/dist/lodash.min.js"></script>
+  <script src="/bower_components/angular/angular.min.js"></script>
+  <script src="/bower_components/restangular/dist/restangular.min.js"></script>
+
+  <script src="recall-api/module.js"></script>
+  <script src="recall-api/api-service.js"></script>
+
+  <script src="app.js"></script>
+</body>
+</html>
