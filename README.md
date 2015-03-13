@@ -9,7 +9,7 @@ The application is written in TypeScript as an HTML5 application, utilizing Node
 and tsd for TypeScript definitions.
 
 ### Getting Started
-After cloning the repository, open and terminal / command prompt and invoke:
+After cloning the repository, open a terminal / command prompt and invoke:
 ```shell
 npm install && bower install
 ```
