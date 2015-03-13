@@ -4,32 +4,47 @@
  * Created by JOHNSB7 on 1/14/2015.
  */
 'use strict';
-angular.module('recallApi').factory('recallService', [
-    'Restangular',
-    function (Restangular) {
-        Restangular.setBaseUrl('/v1.3/api/eng/vehicle-recall-database');
-        var validParameters = [
+var RecallAPIService = (function () {
+    function RecallAPIService(Restangular) {
+        this.validParameters = [
             'make-name',
             'model-name',
             'minimum-model-year',
             'maximum-model-year',
             'year-range'
-        ], length = validParameters.length;
-        return {
-            queryRecall: function (options) {
-                var path = Restangular.one('recall');
-                for (var i = 0; i < length; ++i) {
-                    var param = validParameters[i], paramValue = options[validParameters[i]];
-                    if (paramValue) {
-                        path = Restangular.copy(path).one(param, paramValue);
-                    }
-                }
-                return options.page === 1 ? path.get() : path.get({ page: options.page });
-            },
-            querySummary: function (options) {
-                return Restangular.one('recall-summary').one('recall-number', options['recall-number']).get();
+        ];
+        this.restangularService = Restangular;
+    }
+    /**
+     * Query the recall API with the provided options, returning a Promise.
+     * @param options
+     * @returns {IPromise<any>|IPromise<T>}
+     */
+    RecallAPIService.prototype.queryRecall = function (options) {
+        var path = this.restangularService.one('recall');
+        var length = this.validParameters.length;
+        for (var i = 0; i < length; ++i) {
+            var param = this.validParameters[i], paramValue = options[this.validParameters[i]];
+            if (paramValue) {
+                path = this.restangularService.copy(path).one(param, paramValue);
             }
-        };
+        }
+        return options.page === 1 ? path.get() : path.get({ page: options.page });
+    };
+    /**
+     * Query the recall summary represented by the provided options (recall number), returning a Promise.
+     * @param options
+     * @returns {IPromise<any>|IPromise<T>}
+     */
+    RecallAPIService.prototype.querySummary = function (options) {
+        return this.restangularService.one('recall-summary').one('recall-number', options['recall-number']).get();
+    };
+    return RecallAPIService;
+})();
+angular.module('recallApi', ['restangular']).factory('recallService', [
+    'Restangular',
+    function (Restangular) {
+        return new RecallAPIService(Restangular);
     }
 ]);
 //# sourceMappingURL=api-service.js.map

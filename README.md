@@ -14,7 +14,7 @@ After cloning the repository, open a terminal / command prompt and invoke:
 npm install && bower install
 ```
 
-Once this has run it's course, you will have all of the dependencies required to start the server.
+Once this has run its course, you will have all of the dependencies required to start the server.
 
 ### Starting the server
 At the terminal / command prompt, invoke the following command:
