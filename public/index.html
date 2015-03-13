@@ -5,10 +5,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Vehicle Recall Search</title>
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
+  <link rel="stylesheet" href="main.css" />
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -26,19 +27,19 @@
           <div class="panel-body">
             <form>
               <div class="form-group">
-                <label for="make">Make</label>
+                <label for="make" class="control-label">Make</label>
                 <input class="form-control" type="text" id="make" name="make" data-ng-model="queryOptions['make-name']" placeholder="e.g. Dodge" />
               </div>
-              <div class="form-group">
-                <label for="model">Model</label>
+              <div class="form-group required">
+                <label for="model" class="control-label">Model</label>
                 <input class="form-control" type="text" id="model" name="model" data-ng-model="queryOptions['model-name']" placeholder="e.g. Durango" required="true" />
               </div>
               <div class="form-group">
-                <label for="minYear">Minimum Year</label>
+                <label for="minYear" class="control-label">Minimum Year</label>
                 <input class="form-control" type="number"  min="1950" max="2100" step="1" id="minYear" name="minYear" data-ng-model="queryOptions['minimum-model-year']"/>
               </div>
               <div class="form-group">
-                <label for="maxYear">Maximum Year</label>
+                <label for="maxYear" class="control-label">Maximum Year</label>
                 <input class="form-control" type="number"  min="1950" max="2100" step="1" id="maxYear" name="maxYear" data-ng-model="queryOptions['maximum-model-year']"/>
               </div>
               <div class="form-group">
