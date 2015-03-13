@@ -31,7 +31,7 @@
               </div>
               <div class="form-group">
                 <label for="model">Model</label>
-                <input class="form-control" type="text" id="model" name="model" data-ng-model="queryOptions['model-name']" placeholder="e.g. Durango" />
+                <input class="form-control" type="text" id="model" name="model" data-ng-model="queryOptions['model-name']" placeholder="e.g. Durango" required="true" />
               </div>
               <div class="form-group">
                 <label for="minYear">Minimum Year</label>
@@ -50,7 +50,6 @@
       </div>
       <div class="col-lg-10">
         <div class="panel panel-default">
-          <div class="panel-heading alert-warning" data-ng-hide="valid">You must specify a model name to perform a query</div>
           <div class="panel-body">
             <table class="table table-condensed table-responsive table-hover table-bordered table-striped">
               <tr>
@@ -59,11 +58,11 @@
                 <th>Year</th>
                 <th>Recall Number</th>
               </tr>
-              <tr data-ng-repeat="recall in resultSet" data-ng-class="{success: isSelected(recall)}">
+              <tr data-ng-repeat="recall in resultSet" data-ng-class="{success: isSelected(recall)}" data-ng-click="details(getRecallNumber(recall))">
                 <td>{{getMake(recall)}}</td>
                 <td>{{getModel(recall)}}</td>
                 <td>{{getYear(recall)}}</td>
-                <td><a href="javascript:void(0)" data-ng-click="details(getRecallNumber(recall))">{{getRecallNumber(recall)}}</a></td>
+                <td><a href="javascript:void(0)">{{getRecallNumber(recall)}}</a></td>
               </tr>
             </table>
           </div>
