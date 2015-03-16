@@ -18,7 +18,7 @@ app.use(compression({
 }));
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 80);
 app.set('views', path.join(__dirname, 'public'));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(morgan('dev'));
