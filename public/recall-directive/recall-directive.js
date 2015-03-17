@@ -11,7 +11,13 @@ angular.module('recallDirective', ['recallApi']).directive('vehicleRecall', [
                 /**
                  * Query the API with the currently entered $scope items
                  */
-                $scope.query = function () {
+                $scope.queryNew = function () {
+                    $scope.query(true);
+                };
+                $scope.query = function (reset) {
+                    if (reset) {
+                        $scope.queryOptions.page = 1;
+                    }
                     $scope.summary = null;
                     // model name is required to perform query
                     if (null != $scope.queryOptions['model-name']) {
@@ -98,13 +104,13 @@ angular.module('recallDirective', ['recallApi']).directive('vehicleRecall', [
                 $scope.queryNext = function () {
                     if ($scope.moreResults()) {
                         $scope.queryOptions.page++;
-                        $scope.query();
+                        $scope.query(false);
                     }
                 };
                 $scope.queryPrevious = function () {
                     if ($scope.previousResults()) {
                         $scope.queryOptions.page--;
-                        $scope.query();
+                        $scope.query(false);
                     }
                 };
                 $scope.details = function (recallNumber) {
