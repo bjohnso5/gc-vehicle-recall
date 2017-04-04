@@ -92,14 +92,14 @@ angular.module('recallDirective', ['recallApi']).directive('vehicleRecall', [
                  * @returns {string}
                  */
                 function getRecallDate() {
-                    return getValue($scope.summary, "Recall date");
+                    return getValue($scope.summary, "RECALL_DATE_DTE");
                 }
                 /**
                  * Get the vehicle recall summary associated with the selected recall.
                  * @returns {string}
                  */
                 function getSummaryText() {
-                    return getValue($scope.summary, "Comments");
+                    return getValue($scope.summary, "COMMENT_ETXT");
                 }
                 $scope.queryNext = function () {
                     if ($scope.moreResults()) {
