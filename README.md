@@ -1,5 +1,8 @@
 # Government of Canada Vehicle Recall
 
+## Demo
+A (very, very slow) copy of this repository is currently running on Heroku [here](http://guarded-atoll-2574.herokuapp.com/).
+
 ## Purpose
 This application serves a basic web form interface for querying and displaying recall data from the Government of
 Canada API.
